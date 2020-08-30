@@ -1,0 +1,21 @@
+{% extends 'blog/base.html' %}
+
+
+{% block content %}
+	<h1 class="my-4">Blog Posts
+    	<small>by Eliot</small>
+    </h1>
+	{% for post in posts %}
+	<div class="card mb-4">
+		<!-- <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap"> -->
+		<div class="card-body">
+			<h2 class="card-title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+			<p class="card-text">{{ post.text|safe|truncatewords_html:32 }}</p>
+			<a href="{% url 'post_detail' pk=post.pk %}">Read more</a>
+		</div>
+		<div class="card-footer text-muted">
+			Posted on {{ post.published_date }} by {{ post.author }}
+		</div>
+	</div>
+	{% endfor %}
+{% endblock %}
